@@ -6,26 +6,25 @@ import Section from './Section';
 import Statistics from './Statistics';
 
 export default function App() {
-  
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const onHandleChange = (key) => {
+  const onHandleChange = key => {
     switch (key) {
       case 'good':
-        setGood(prev => key = prev + 1);
+        setGood(prev => prev + 1);
         break;
       case 'neutral':
-        setNeutral(prev => key = prev + 1);
+        setNeutral(prev => prev + 1);
         break;
       case 'bad':
-        setBad(prev => key = prev + 1);
+        setBad(prev => prev + 1);
         break;
       default:
         return;
     }
-  }
+  };
 
   const countTotalFeedback = ({ good, neutral, bad }) => good + neutral + bad;
 
@@ -37,7 +36,7 @@ export default function App() {
       <Conteiner>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={{good, neutral, bad}}
+            options={{ good, neutral, bad }}
             onLeaveFeedback={onHandleChange}
           />
         </Section>
@@ -48,10 +47,12 @@ export default function App() {
               good={good}
               neutral={neutral}
               bad={bad}
-              total={countTotalFeedback({good, neutral, bad})}
-              positivePercentage={countPositiveFeedbackPercentage(
-                {good, neutral, bad}
-              )}
+              total={countTotalFeedback({ good, neutral, bad })}
+              positivePercentage={countPositiveFeedbackPercentage({
+                good,
+                neutral,
+                bad,
+              })}
             />
           ) : (
             <Notification message="No feedback given" />
